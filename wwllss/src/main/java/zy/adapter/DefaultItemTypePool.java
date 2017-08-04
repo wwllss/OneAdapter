@@ -1,6 +1,7 @@
 package zy.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -17,15 +18,15 @@ class DefaultItemTypePool implements ItemTypePool {
     private final List<ItemType> itemTypeList = new ArrayList<>();
 
     @Override
-    public void registerType(ItemType itemType) {
-        if (itemType == null || itemTypeList.contains(itemType)) {
+    public void registerType(@NonNull ItemType itemType) {
+        if (itemTypeList.contains(itemType)) {
             return;
         }
         itemTypeList.add(itemType);
     }
 
     @Override
-    public int getItemType(Class<?> dataClass) {
+    public int getItemType(@NonNull Class<?> dataClass) {
         for (int i = 0; i < itemTypeList.size(); i++) {
             if (itemTypeList.get(i).getDataClass() == dataClass) {
                 return i;

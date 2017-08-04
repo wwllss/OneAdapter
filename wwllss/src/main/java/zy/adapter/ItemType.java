@@ -1,6 +1,7 @@
 package zy.adapter;
 
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 
 /**
  * @author zhangyuan
@@ -9,14 +10,13 @@ import android.support.annotation.LayoutRes;
 
 public class ItemType {
 
-    @LayoutRes
     private int layoutId;
 
     private Class<?> dataClass;
 
     private Class<? extends BaseViewHolder> holderClass;
 
-    public ItemType(int layoutId, Class<?> dataClass, Class<? extends BaseViewHolder> holderClass) {
+    public ItemType(@LayoutRes int layoutId, @NonNull Class<?> dataClass, @NonNull Class<? extends BaseViewHolder> holderClass) {
         this.layoutId = layoutId;
         this.dataClass = dataClass;
         this.holderClass = holderClass;

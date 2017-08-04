@@ -6,7 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import zy.adapter.BaseAdapter;
+import zy.adapter.OneAdapter;
 import zy.adapter.ItemType;
 import zy.annotation.ViewInject;
 import zy.utils.InjectUtil;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @ViewInject(R.id.list_view)
     private RecyclerView listView;
 
-    private BaseAdapter<Object> adapter;
+    private OneAdapter<Object> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         listView.setLayoutManager(manager);
 
-        adapter = new BaseAdapter<>();
+        adapter = new OneAdapter<>();
         adapter.register(new ItemType(R.layout.item_string, String.class, TextHolder.class));
         adapter.register(new ItemType(R.layout.item_image, Integer.class, ImageHolder.class));
         adapter.register(new ItemType(R.layout.item_divider, Divider.class, DividerHolder.class));

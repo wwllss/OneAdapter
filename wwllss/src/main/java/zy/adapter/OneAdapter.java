@@ -12,13 +12,13 @@ import java.util.List;
  * @author zhangyuan
  * @date 2017/8/4.
  */
-public class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
+public class OneAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
 
     private final List<T> dataList = new ArrayList<>();
 
     private final ItemTypePool itemTypePool;
 
-    public BaseAdapter() {
+    public OneAdapter() {
         itemTypePool = new DefaultItemTypePool();
     }
 

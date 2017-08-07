@@ -42,7 +42,7 @@ public abstract class BaseViewHolder<T> extends ViewHolder {
 
     }
 
-    public void setData(T data) {
+    void bindData(T data) {
         this.data = data;
         onBindData(data);
     }

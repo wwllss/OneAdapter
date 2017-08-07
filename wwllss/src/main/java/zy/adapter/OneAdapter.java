@@ -29,7 +29,7 @@ public class OneAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
 
     @Override
     public void onBindViewHolder(BaseViewHolder<T> holder, int position) {
-        holder.setData(getItem(position));
+        holder.bindData(getItem(position));
     }
 
     public List<T> getDataList() {

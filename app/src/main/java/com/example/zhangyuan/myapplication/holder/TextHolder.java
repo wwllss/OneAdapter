@@ -5,9 +5,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zhangyuan.myapplication.R;
+
 import zy.adapter.BaseViewHolder;
 import zy.annotation.ViewInject;
-import com.example.zhangyuan.myapplication.R;
 
 /**
  * @author zhangyuan
@@ -24,7 +25,7 @@ public class TextHolder extends BaseViewHolder<String> {
 
     @Override
     protected void initListener() {
-        itemView.setOnClickListener(new View.OnClickListener() {
+        getItemView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), getData(), Toast.LENGTH_SHORT).show();

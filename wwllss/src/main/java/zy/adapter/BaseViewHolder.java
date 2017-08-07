@@ -10,12 +10,11 @@ import zy.utils.InjectUtil;
  * @author zhangyuan
  * @date 2017/8/4.
  */
-
 public abstract class BaseViewHolder<T> extends ViewHolder {
 
     private final Context context;
 
-    protected final View itemView;
+    private final View itemView;
 
     private T data;
 
@@ -31,6 +30,10 @@ public abstract class BaseViewHolder<T> extends ViewHolder {
         return context;
     }
 
+    protected View getItemView() {
+        return itemView;
+    }
+
     public T getData() {
         return data;
     }
@@ -40,12 +43,8 @@ public abstract class BaseViewHolder<T> extends ViewHolder {
     }
 
     public void setData(T data) {
-//        try {
         this.data = data;
         onBindData(data);
-//        } catch (ClassCastException e) {
-//            e.printStackTrace();
-//        }
     }
 
     protected abstract void onBindData(T data);

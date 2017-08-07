@@ -41,7 +41,7 @@ class DefaultItemTypePool implements ItemTypePool {
         Class<? extends BaseViewHolder> holderClass = itemType.getHolderClass();
         int layoutId = itemType.getLayoutId();
         try {
-            Constructor<? extends BaseViewHolder> constructor = holderClass.getConstructor(Context.class, View.class);
+            Constructor<? extends BaseViewHolder> constructor = holderClass.getDeclaredConstructor(Context.class, View.class);
             constructor.setAccessible(true);
             return constructor.newInstance(inflater.getContext(), inflater.inflate(layoutId, null, false));
         } catch (Exception e) {

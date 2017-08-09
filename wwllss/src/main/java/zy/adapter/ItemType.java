@@ -22,15 +22,15 @@ public class ItemType {
         this.holderClass = holderClass;
     }
 
-    int getLayoutId() {
+    public int getLayoutId() {
         return layoutId;
     }
 
-    Class<?> getDataClass() {
+    public Class<?> getDataClass() {
         return dataClass;
     }
 
-    Class<? extends BaseViewHolder> getHolderClass() {
+    public Class<? extends BaseViewHolder> getHolderClass() {
         return holderClass;
     }
 

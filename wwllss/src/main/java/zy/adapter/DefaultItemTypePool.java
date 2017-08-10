@@ -26,9 +26,9 @@ class DefaultItemTypePool implements ItemTypePool {
     }
 
     @Override
-    public int getItemType(@NonNull Class<?> dataClass) {
+    public <T> int getItemType(@NonNull Class<T> dataClass) {
         for (int i = 0; i < itemTypeList.size(); i++) {
-            if (itemTypeList.get(i).getDataClass() == dataClass) {
+            if (itemTypeList.get(i).getDataClass().isAssignableFrom(dataClass)) {
                 return i;
             }
         }

@@ -42,7 +42,7 @@ public class OneAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
 
     @Override
     public int getItemViewType(int position) {
-        return itemTypePool.getItemType(getItem(position).getClass());
+        return itemTypePool.getItemType(getItem(position));
     }
 
     @Override

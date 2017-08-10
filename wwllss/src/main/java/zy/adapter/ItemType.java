@@ -16,10 +16,14 @@ public class ItemType {
 
     private Class<? extends BaseViewHolder> holderClass;
 
-    public ItemType(@LayoutRes int layoutId, @NonNull Class<?> dataClass, @NonNull Class<? extends BaseViewHolder> holderClass) {
+    private ItemType(@LayoutRes int layoutId, @NonNull Class<?> dataClass, @NonNull Class<? extends BaseViewHolder> holderClass) {
         this.layoutId = layoutId;
         this.dataClass = dataClass;
         this.holderClass = holderClass;
+    }
+
+    public static ItemType create(@LayoutRes int layoutId, @NonNull Class<?> dataClass, @NonNull Class<? extends BaseViewHolder> holderClass) {
+        return new ItemType(layoutId, dataClass, holderClass);
     }
 
     public int getLayoutId() {

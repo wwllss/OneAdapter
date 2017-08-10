@@ -6,10 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import zy.adapter.OneAdapter;
-import zy.adapter.ItemType;
-import zy.annotation.ViewInject;
-import zy.utils.InjectUtil;
 import com.example.zhangyuan.myapplication.holder.DividerHolder;
 import com.example.zhangyuan.myapplication.holder.ImageHolder;
 import com.example.zhangyuan.myapplication.holder.TextHolder;
@@ -17,6 +13,10 @@ import com.example.zhangyuan.myapplication.model.Divider;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import zy.adapter.OneAdapter;
+import zy.annotation.ViewInject;
+import zy.utils.InjectUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
         listView.setLayoutManager(manager);
 
         adapter = new OneAdapter<>();
-        adapter.register(new ItemType(R.layout.item_string, String.class, TextHolder.class));
-        adapter.register(new ItemType(R.layout.item_image, Integer.class, ImageHolder.class));
-        adapter.register(new ItemType(R.layout.item_divider, Divider.class, DividerHolder.class));
+        adapter.register(R.layout.item_string, String.class, TextHolder.class);
+        adapter.register(R.layout.item_image, Integer.class, ImageHolder.class);
+        adapter.register(R.layout.item_divider, Divider.class, DividerHolder.class);
         listView.setAdapter(adapter);
 
         preData();

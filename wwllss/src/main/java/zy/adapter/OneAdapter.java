@@ -1,5 +1,6 @@
 package zy.adapter;
 
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -66,8 +67,11 @@ public class OneAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
         return this.dataList.size();
     }
 
-    public void register(@NonNull ItemType itemType) {
-        itemTypePool.registerType(itemType);
+    public void register(
+            @LayoutRes int layoutId,
+            @NonNull Class<?> dataClass,
+            @NonNull Class<? extends BaseViewHolder> holderClass) {
+        itemTypePool.registerType(ItemType.create(layoutId, dataClass, holderClass));
     }
 
 }

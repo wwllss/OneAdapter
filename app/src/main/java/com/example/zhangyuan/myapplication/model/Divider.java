@@ -6,4 +6,14 @@ package com.example.zhangyuan.myapplication.model;
  */
 public class Divider {
     //empty
+
+    public final Height height;
+
+    public Divider(Height height) {
+        this.height = height;
+    }
+
+    public enum Height {
+        FIVE, TEN
+    }
 }

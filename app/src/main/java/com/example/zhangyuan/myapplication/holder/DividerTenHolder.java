@@ -11,8 +11,8 @@ import zy.adapter.BaseViewHolder;
  * @author zhangyuan
  * @date 2017/8/4.
  */
-public class DividerHolder extends BaseViewHolder<Divider> {
-    public DividerHolder(Context context, View itemView) {
+public class DividerTenHolder extends BaseViewHolder<Divider> {
+    public DividerTenHolder(Context context, View itemView) {
         super(context, itemView);
     }
 

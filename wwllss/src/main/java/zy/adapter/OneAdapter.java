@@ -43,7 +43,7 @@ public class OneAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
 
     @Override
     public int getItemViewType(int position) {
-        return itemTypePool.getItemType(getItem(position));
+        return itemTypePool.getItemType(getItem(position), position);
     }
 
     @Override
@@ -68,10 +68,15 @@ public class OneAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
     }
 
     public void register(
-            @LayoutRes int layoutId,
             @NonNull Class<?> dataClass,
-            @NonNull Class<? extends BaseViewHolder> holderClass) {
-        itemTypePool.registerType(ItemType.create(layoutId, dataClass, holderClass));
+            @NonNull Class<? extends BaseViewHolder> holderClass,
+            @LayoutRes int layoutId) {
+        itemTypePool.registerType(ItemType.create(dataClass, holderClass, layoutId));
+    }
+
+    public <T> void register(
+            @NonNull Class<T> dataClass, @NonNull Linker<T> linker) {
+        itemTypePool.registerType(ItemType.create(dataClass, linker));
     }
 
 }

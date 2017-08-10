@@ -7,6 +7,7 @@ import android.view.View;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -19,17 +20,42 @@ class DefaultItemTypePool implements ItemTypePool {
 
     @Override
     public void registerType(@NonNull ItemType itemType) {
-        if (itemTypeList.contains(itemType)) {
-            return;
+        removeIfExists(itemType);
+        Linker<?> linker = itemType.getLinker();
+        if (linker == null) {
+            itemTypeList.add(itemType);
+        } else {
+            HolderInfo[] holderInfoList = linker.getHolderInfoList();
+            for (HolderInfo holderInfo : holderInfoList) {
+                ItemType newItemType = ItemType.create(
+                        itemType.getDataClass(),
+                        holderInfo.holderClass,
+                        holderInfo.layoutId
+                );
+                newItemType.setLinker(linker);
+                itemTypeList.add(newItemType);
+            }
         }
-        itemTypeList.add(itemType);
+    }
+
+    private void removeIfExists(@NonNull ItemType itemType) {
+        Iterator<ItemType> iterator = itemTypeList.iterator();
+        while (iterator.hasNext()) {
+            ItemType next = iterator.next();
+            if (itemType.equals(next)) {
+                iterator.remove();
+            }
+        }
     }
 
     @Override
-    public <T> int getItemType(@NonNull T data) {
+    @SuppressWarnings("unchecked")
+    public <T> int getItemType(@NonNull T data, int position) {
         for (int i = 0; i < itemTypeList.size(); i++) {
-            if (itemTypeList.get(i).getDataClass().isInstance(data)) {
-                return i;
+            ItemType itemType = itemTypeList.get(i);
+            if (itemType.getDataClass().isInstance(data)) {
+                Linker<Object> linker = (Linker<Object>) itemType.getLinker();
+                return i + (linker == null ? 0 : linker.linkHolder(data, position));
             }
         }
         throw new RuntimeException("error data ---> " + data.getClass().toString());

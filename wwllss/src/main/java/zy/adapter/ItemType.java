@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
  * @date 2017/8/4.
  */
 
-public class ItemType {
+class ItemType {
 
     private int layoutId;
 
@@ -16,26 +16,45 @@ public class ItemType {
 
     private Class<? extends BaseViewHolder> holderClass;
 
-    private ItemType(@LayoutRes int layoutId, @NonNull Class<?> dataClass, @NonNull Class<? extends BaseViewHolder> holderClass) {
-        this.layoutId = layoutId;
+    private Linker<?> linker;
+
+    private ItemType(@NonNull Class<?> dataClass, @NonNull Class<? extends BaseViewHolder> holderClass, @LayoutRes int layoutId) {
         this.dataClass = dataClass;
         this.holderClass = holderClass;
+        this.layoutId = layoutId;
     }
 
-    public static ItemType create(@LayoutRes int layoutId, @NonNull Class<?> dataClass, @NonNull Class<? extends BaseViewHolder> holderClass) {
-        return new ItemType(layoutId, dataClass, holderClass);
+    private ItemType(@NonNull Class<?> dataClass, Linker<?> linker) {
+        this.dataClass = dataClass;
+        this.linker = linker;
     }
 
-    public int getLayoutId() {
+    static ItemType create(@NonNull Class<?> dataClass, @NonNull Class<? extends BaseViewHolder> holderClass, @LayoutRes int layoutId) {
+        return new ItemType(dataClass, holderClass, layoutId);
+    }
+
+    static <T> ItemType create(@NonNull Class<T> dataClass, @NonNull Linker<T> linker) {
+        return new ItemType(dataClass, linker);
+    }
+
+    int getLayoutId() {
         return layoutId;
     }
 
-    public Class<?> getDataClass() {
+    Class<?> getDataClass() {
         return dataClass;
     }
 
-    public Class<? extends BaseViewHolder> getHolderClass() {
+    Class<? extends BaseViewHolder> getHolderClass() {
         return holderClass;
+    }
+
+    Linker<?> getLinker() {
+        return linker;
+    }
+
+    void setLinker(Linker<?> linker) {
+        this.linker = linker;
     }
 
     @Override

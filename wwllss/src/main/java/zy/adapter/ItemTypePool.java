@@ -10,7 +10,7 @@ public interface ItemTypePool {
 
     void registerType(ItemType itemType);
 
-    <T> int getItemType(T data);
+    <T> int getItemType(T data, int position);
 
     <T> BaseViewHolder<T> newInstance(LayoutInflater inflater, int itemViewType);
 

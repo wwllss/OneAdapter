@@ -1,12 +1,14 @@
 package com.example.zhangyuan.myapplication;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.zhangyuan.myapplication.holder.DividerHolder;
+import com.example.zhangyuan.myapplication.holder.DividerTenHolder;
 import com.example.zhangyuan.myapplication.holder.ImageHolder;
 import com.example.zhangyuan.myapplication.holder.TextHolder;
 import com.example.zhangyuan.myapplication.model.Divider;
@@ -14,6 +16,8 @@ import com.example.zhangyuan.myapplication.model.Divider;
 import java.util.ArrayList;
 import java.util.List;
 
+import zy.adapter.HolderInfo;
+import zy.adapter.Linker;
 import zy.adapter.OneAdapter;
 import zy.annotation.ViewInject;
 import zy.utils.InjectUtil;
@@ -38,9 +42,23 @@ public class MainActivity extends AppCompatActivity {
         listView.setLayoutManager(manager);
 
         adapter = new OneAdapter<>();
-        adapter.register(R.layout.item_string, String.class, TextHolder.class);
-        adapter.register(R.layout.item_image, Integer.class, ImageHolder.class);
-        adapter.register(R.layout.item_divider, Divider.class, DividerHolder.class);
+        adapter.register(String.class, TextHolder.class, R.layout.item_string);
+        adapter.register(Integer.class, ImageHolder.class, R.layout.item_image);
+        adapter.register(Divider.class, new Linker<Divider>() {
+            @NonNull
+            @Override
+            public HolderInfo[] getHolderInfoList() {
+                return new HolderInfo[]{
+                        HolderInfo.info(DividerHolder.class, R.layout.item_divider),
+                        HolderInfo.info(DividerTenHolder.class, R.layout.item_divider_ten)
+                };
+            }
+
+            @Override
+            public int linkHolder(Divider data, int position) {
+                return data.height == Divider.Height.TEN ? 1 : 0;
+            }
+        });
         listView.setAdapter(adapter);
 
         preData();
@@ -57,7 +75,9 @@ public class MainActivity extends AppCompatActivity {
             } else if (i % 3 == 1) {
                 data.add(R.mipmap.ic_launcher);
             } else {
-                data.add(new Divider());
+                data.add(new Divider(
+                        i % 2 == 0 ? Divider.Height.FIVE : Divider.Height.TEN
+                ));
             }
         }
         offset = adapter.notifyDataSetChanged(data, false);

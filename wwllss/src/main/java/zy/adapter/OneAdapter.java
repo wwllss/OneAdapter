@@ -74,8 +74,8 @@ public class OneAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
         itemTypePool.registerType(ItemType.create(dataClass, holderClass, layoutId));
     }
 
-    public <T> void register(
-            @NonNull Class<T> dataClass, @NonNull Linker<T> linker) {
+    public <D> void register(
+            @NonNull Class<D> dataClass, @NonNull Linker<D> linker) {
         itemTypePool.registerType(ItemType.create(dataClass, linker));
     }
 

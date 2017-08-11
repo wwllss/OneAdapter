@@ -9,9 +9,9 @@ import android.support.annotation.LayoutRes;
 public class HolderInfo {
 
     @LayoutRes
-    public final int layoutId;
+    final int layoutId;
 
-    public final Class<? extends BaseViewHolder> holderClass;
+    final Class<? extends BaseViewHolder> holderClass;
 
     private HolderInfo(Class<? extends BaseViewHolder> holderClass, int layoutId) {
         this.holderClass = holderClass;

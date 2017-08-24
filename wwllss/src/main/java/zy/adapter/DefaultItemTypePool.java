@@ -53,7 +53,7 @@ class DefaultItemTypePool implements ItemTypePool {
     public <T> int getItemType(@NonNull T data, int position) {
         for (int i = 0; i < itemTypeList.size(); i++) {
             ItemType itemType = itemTypeList.get(i);
-            if (itemType.getDataClass().isInstance(data)) {
+            if (itemType.getDataClass() == data.getClass()) {
                 Linker<Object> linker = (Linker<Object>) itemType.getLinker();
                 return i + (linker == null ? 0 : linker.linkHolder(data, position));
             }

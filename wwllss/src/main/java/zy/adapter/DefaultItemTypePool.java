@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
@@ -62,14 +63,15 @@ class DefaultItemTypePool implements ItemTypePool {
     }
 
     @Override
-    public <T> BaseViewHolder<T> newInstance(LayoutInflater inflater, int itemViewType) {
+    public <T> BaseViewHolder<T> newInstance(ViewGroup parent, int itemViewType) {
         ItemType itemType = itemTypeList.get(itemViewType);
         Class<? extends BaseViewHolder> holderClass = itemType.getHolderClass();
         int layoutId = itemType.getLayoutId();
         try {
             Constructor<? extends BaseViewHolder> constructor = holderClass.getDeclaredConstructor(Context.class, View.class);
             constructor.setAccessible(true);
-            return constructor.newInstance(inflater.getContext(), inflater.inflate(layoutId, null, false));
+            Context context = parent.getContext();
+            return constructor.newInstance(context, LayoutInflater.from(context).inflate(layoutId, parent, false));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

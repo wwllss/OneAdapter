@@ -1,6 +1,6 @@
 package zy.adapter;
 
-import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 /**
  * @author zhangyuan
@@ -12,6 +12,6 @@ public interface ItemTypePool {
 
     <T> int getItemType(T data, int position);
 
-    <T> BaseViewHolder<T> newInstance(LayoutInflater inflater, int itemViewType);
+    <T> BaseViewHolder<T> newInstance(ViewGroup parent, int itemViewType);
 
 }

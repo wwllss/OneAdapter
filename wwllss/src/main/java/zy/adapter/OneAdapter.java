@@ -25,7 +25,7 @@ public class OneAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
 
     @Override
     public BaseViewHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
-        return itemTypePool.newInstance(LayoutInflater.from(parent.getContext()), viewType);
+        return itemTypePool.newInstance(parent, viewType);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class OneAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
 
     public int notifyDataSetChanged(List<T> dataList, boolean isRefresh) {
         if (dataList == null) {
-            return 0;
+            return this.dataList.size();
         }
         if (isRefresh) {
             this.dataList.clear();

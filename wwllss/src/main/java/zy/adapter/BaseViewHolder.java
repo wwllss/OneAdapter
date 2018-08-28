@@ -1,5 +1,8 @@
 package zy.adapter;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
@@ -10,7 +13,7 @@ import zy.utils.InjectUtil;
  * @author zhangyuan
  * @date 2017/8/4.
  */
-public abstract class BaseViewHolder<T> extends ViewHolder {
+public abstract class BaseViewHolder<T> extends ViewHolder implements LifecycleObserver {
 
     private final Context context;
 
@@ -39,6 +42,11 @@ public abstract class BaseViewHolder<T> extends ViewHolder {
     }
 
     protected void initListener() {
+
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    public void onDestroy() {
 
     }
 

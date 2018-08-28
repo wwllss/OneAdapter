@@ -1,5 +1,7 @@
 package com.example.zhangyuan.myapplication;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView listView;
 
     private OneAdapter<Object> adapter;
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, MainActivity.class);
+        context.startActivity(starter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

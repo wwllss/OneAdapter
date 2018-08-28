@@ -1,10 +1,12 @@
 package com.example.zhangyuan.myapplication.holder;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zhangyuan.myapplication.MainActivity;
 import com.example.zhangyuan.myapplication.R;
 
 import zy.adapter.BaseViewHolder;
@@ -29,8 +31,14 @@ public class TextHolder extends BaseViewHolder<String> {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), getData(), Toast.LENGTH_SHORT).show();
+                MainActivity.start(getContext());
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.e("TextHolder","LifeCycle onDestroy");
     }
 
     @Override

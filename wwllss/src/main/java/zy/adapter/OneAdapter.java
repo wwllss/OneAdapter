@@ -1,5 +1,7 @@
 package zy.adapter;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -24,12 +26,17 @@ public class OneAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
     }
 
     @Override
-    public BaseViewHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
-        return itemTypePool.newInstance(parent, viewType);
+    public BaseViewHolder<T> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        BaseViewHolder<T> holder = itemTypePool.newInstance(parent, viewType);
+        Context context = parent.getContext();
+        if (context instanceof LifecycleOwner) {
+            ((LifecycleOwner) context).getLifecycle().addObserver(holder);
+        }
+        return holder;
     }
 
     @Override
-    public void onBindViewHolder(BaseViewHolder<T> holder, int position) {
+    public void onBindViewHolder(@NonNull BaseViewHolder<T> holder, int position) {
         holder.bindData(getItem(position));
     }
 

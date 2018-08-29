@@ -25,6 +25,7 @@ public class OneAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
         itemTypePool = new DefaultItemTypePool();
     }
 
+    @NonNull
     @Override
     public BaseViewHolder<T> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         BaseViewHolder<T> holder = itemTypePool.newInstance(parent, viewType);
